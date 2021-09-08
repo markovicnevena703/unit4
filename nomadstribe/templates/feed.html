@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section>
+  <br>
+  <br>
+  <div class="container">
+    <div class="dropdown is-active">
+      <div class="dropdown-trigger">
+        <button class="button is-link" aria-haspopup="true" aria-controls="dropdown-menu5">
+          <span>Filter by location:</span>
+          <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+        </button>
+        <button class="button is-link" aria-haspopup="true" aria-controls="dropdown-menu5">
+          <span>Filter by distance:</span>
+          <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+        </button>
+        <button class="button is-primary">Explore</button>
+      </div>
+    </div>
+  </div>
+ 
+</section>
+<br>
+{% for post in posts.values() %}
+<article class="media">
+  <figure class="media-left">
+    
+      <div class="box has-background-info-light">
+       {{post['RouteName']}}
+        <br>
+        <br>
+        <img src="{{url_for('static', filename=post['Image'])}}" width="200" height="40">
+        
+        <br>
+        <div class="buttons are-small">
+        <button class="button is-link">See full gallery</button></div>
+        <strong>{{post['Name']}}</strong> <br><small>{{post['Username']}}</small><br> <small>{{post['Date']}}</small>
+      </div>
+  
+  </figure>
+  <div class="media-content">
+    <div class="content">
+      <div class="box has-text-left has-background-info-light"> 
+        <ul style="list-style-type:none ">                
+     <li><b>Distance:</b> {{post['Distance']}}km </li>
+     <li><b>Technical difficulty:</b> {{post['TechnicalD']}}/10 </li>
+     <li><b>Conditional difficulty: </b>{{post['ConditionD']}}/10</li>
+     <li><b>Time:</b> {{post['Time']}}h</li>
+     <li><b>GPX file:</b> <p style="color:rgb(120, 120, 245)"><a>{{post['GPX']}}</a></p> </li>
+     </ul>
+     <div class="content">
+         <p style="text-align:left">
+           <br>
+           {{post['Description']}}
+         </p>
+         <div class="buttons">
+             <button class="button is-link"><a href="{{url_for('post_page',post_id=post['PostID'])}}" style="color:white">Read More</a></button>
+             <button class="button is-danger is-focused has-text-right">Archive</button>
+             <span class="icon-text">
+              <span class="icon">
+                <a><i class="fas fa-heart is-size-4 is-danger"></i></a>
+              </span>
+              <span><p style="color:blue">{{post['Likes'] | count}}</p></span>
+            </span>
+             
+           </div>
+         
+       </div>
+
+ </div>
+    </div>
+  </div>
+  <div class="media-right">
+    <button class="delete"></button>
+  </div>
+</article>
+{% endfor %}
+
+{% endblock %}

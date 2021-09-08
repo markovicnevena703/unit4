@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <div class="tile is-parent">
+    <article class="tile is-child notification is-light">
+        <p class="subtitle">Description:</p>
+      <div class="content">
+        {{post['Description']}}
+        <br>
+        <br>
+        {{post['AdditionalText']}}
+       </p>
+       <p>
+         <p class="bd-notification is-primary">
+             <ul style="list-style-type:none ">                
+                 <li><b>Distance:</b> {{post['Distance']}}km </li>
+                 <li><b>Technical difficulty:</b> {{post['TechnicalD']}}/10 </li>
+                 <li><b>Conditional difficulty: </b>{{post['ConditionD']}}/10</li>
+                 <li><b>Time:</b> {{post['Time']}}h</li>
+                 <li><b>GPX file:</b> <p style="color:rgb(120, 120, 245)"><a>{{post['GPX']}}</a></p> </li>
+                 </ul>
+     
+           </p>
+       </p>
+      </div>
+    </article>
+  </div>
+<div class="columns is-vcentered">
+    <div class="column is-small">
+        {% for comment in post['Comments'] %}
+        <article class="media">
+            <div class="media-content">
+              <div class="content">
+                <p>
+                  <strong><a>{{comment['Name']}}</a></strong><br><small>{{comment['Username']}}</small>
+                  <br>
+                  {{comment['Text']}}
+                  <br>
+                </p>
+              </div>
+          
+         
+          {% endfor %}
+          <article class="media">
+            <div class="media-content">
+              <div class="field">
+                <p class="control">
+                  <textarea class="textarea" placeholder="Add a comment..."></textarea>
+                </p>
+              </div>
+              <div class="field">
+                <p class="control">
+                    <button class="button is-link">Post</button></div>
+                    <br>
+                    <br>
+                    <br>
+                    <button class="button is-link"><a href="{{url_for('feed')}}" style="color:white">Back to Feed</a></button>
+                </p>
+              </div>
+            </div>
+           
+          </article>
+    </div>
+    <div class="column">
+        <img src="{{url_for('static', filename=post['MapImage'])}}" width="400" height="400">
+        <br>
+        <a class="button">Satelite</a>
+        <a class="button">Hybrid</a>
+        <a class="button">Street Map</a>
+        <br>
+    </div>
+  </div>
+
+ 
+
+
+{% endblock %}
