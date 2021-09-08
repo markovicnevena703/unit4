@@ -39,7 +39,7 @@
         <br>
         <div class="buttons are-small">
         <button class="button is-link">See full gallery</button></div>
-        <strong>{{post['Name']}}</strong> <br><small>{{post['Username']}}</small><br> <small>{{post['Date']}}</small>
+        <strong><a href="{{url_for('profile', username=post['Username'])}}">{{post['Name']}}</a></strong> <br><small>{{post['Username']}}</small><br> <small>{{post['Date']}}</small>
       </div>
   
   </figure>
